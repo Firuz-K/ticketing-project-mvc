@@ -1,10 +1,12 @@
-package com.cydeo.controller.entity;
+package com.cydeo.entity;
 
-import com.cydeo.controller.enums.Gender;
+import com.cydeo.enums.Gender;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
 
 @NoArgsConstructor
 @Data

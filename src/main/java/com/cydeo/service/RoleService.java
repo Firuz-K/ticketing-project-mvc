@@ -1,8 +1,11 @@
 package com.cydeo.service;
 
-import com.cydeo.controller.dto.RoleDTO;
+import com.cydeo.dto.RoleDTO;
 
 
-public interface RoleService extends CRUDService<RoleDTO, Long> {
+
+public interface RoleService extends CrudService<RoleDTO,Long>{
+
+
 
 }
