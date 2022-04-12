@@ -56,7 +56,6 @@
                                                     <select th:field="*{assignedManager}"  class="custom-select">
                                                         <option th:value="''" th:text="Select"></option>
                                                         <option th:each="manager : ${managers}" th:value="${manager.userName}"  th:text="${manager.firstName +' '+ manager.lastName}"></option>
-
                                                     </select>
                                                 </div>
                                             </div>
@@ -135,7 +134,7 @@
                                                 <td th:text="${project.assignedManager.firstName + '' + project.assignedManager.lastName}"></td>
                                                 <td th:text="${project.projectStatus.value}"></td>
                                                 <td>
-                                                    <a href="#"><button type="button" class="btn btn-warning rounded-0">Update</button></a>
+                                                    <a th:href="@{/project/update/{id}(id=${project.getProjectCode()})}"><button type="button" class="btn btn-warning rounded-0">Update</button></a>
                                                     <a th:href="@{/project/delete/{id}(id=${project.getProjectCode()})}"><button type="button" class="btn btn-danger rounded-0">Delete</button></a>
                                                     <a th:href="@{/project/complete/{id}(id=${project.getProjectCode()})}"><button type="button" class="btn btn-info rounded-0">Complete</button></a>
                                                 </td>

@@ -2,11 +2,14 @@ package com.cydeo.controller;
 
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.service.ProjectService;
 import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/project")
@@ -51,6 +54,41 @@ public class ProjectController {
         projectService.complete(projectService.findById(projectCode));
 
         return "redirect:/project/create";
+    }
+
+    @GetMapping("/update/{projectCode}")
+    public String editProject(@PathVariable("projectCode") String projectCode,Model model){
+
+        model.addAttribute("project",projectService.findById(projectCode));
+        model.addAttribute("managers",userService.findManagers());
+        model.addAttribute("projects",projectService.findAll());
+
+        return "/project/update";
+    }
+
+    @PostMapping("/update")
+    public String update(ProjectDTO projectDTO){
+
+        projectService.update(projectDTO);
+
+        return "redirect:/project/create";
+    }
+    @GetMapping("/manager/project-status")
+    public String getProjectManager(Model model){
+
+        UserDTO manager = userService.findById("john@cydeo.com");
+
+        List<ProjectDTO> projects = projectService.getCountedListOfProjectDTO(manager);
+
+        model.addAttribute("projects",projects);
+
+        return "/manager/project-status";
+    }
+
+    @GetMapping("/manager/complete/{projectCode}")
+    public String managerCompleteProject(@PathVariable("projectCode") String projectCode) {
+        projectService.complete(projectService.findById(projectCode));
+        return "redirect:/project/manager/project-status";
     }
 
 
